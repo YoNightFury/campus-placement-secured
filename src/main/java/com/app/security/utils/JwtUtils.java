@@ -98,13 +98,8 @@ public class JwtUtils {
 		// we have stored the claims as boolean
 		Boolean adminClaim = claims.get("isAdmin", Boolean.class);
 		Boolean studentClaim = claims.get("isStudent", Boolean.class);
-		Boolean isRegistering = claims.get("isRegistering", Boolean.class);
 		// list of authorities or roles
 		List<? extends GrantedAuthority> roles = null;
-		if (isRegistering != null && isRegistering) {
-			roles = Arrays.asList(new SimpleGrantedAuthority("ROLE_" + "REGISTERING"));
-			username = "REGISTERING";
-		}
 		if (adminClaim != null && adminClaim)
 			roles = Arrays.asList(new SimpleGrantedAuthority("ROLE_" + Role.ADMIN));
 		if (studentClaim != null && studentClaim)

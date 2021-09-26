@@ -1,5 +1,6 @@
 package com.app.pojos;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -34,8 +35,8 @@ public class PlacementDetails extends BaseEntity {
 	}
 
 	// associaton
-	@OneToOne
-	@JoinColumn(name = "company_id")
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "company_id" )
 	private Company company;
 
 	

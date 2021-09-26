@@ -6,4 +6,5 @@ import com.app.pojos.Company;
 
 public interface CompanyRepository extends JpaRepository<Company, Integer>{
 
+	   Company findByName(String companyName);
 }

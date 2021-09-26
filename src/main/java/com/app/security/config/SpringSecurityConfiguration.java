@@ -69,8 +69,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.authorizeRequests() //
 				.antMatchers("/admin/**").hasRole("ADMIN") // ADMIN ACCESS
 				.antMatchers("/student/**").hasRole("STUDENT") // STUDENT ACCESS
-				.antMatchers("/registration/credential/**").hasRole("REGISTERING")  // IF STUDENT HAS NOT SET CREDS
-				.antMatchers("/registration/**", "/views/**","/login").permitAll() // ALL ACCESS
+				.antMatchers("/registration/**", "/public/**","/login").permitAll() // ALL ACCESS
 				.anyRequest().authenticated() // all authenticated access
 				// make session stateless
 				.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)//
