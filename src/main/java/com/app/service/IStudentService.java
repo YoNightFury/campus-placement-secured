@@ -6,7 +6,9 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.app.dto.DtoToInsertPlacementDetails;
+import com.app.dto.QuestionDto;
 import com.app.dto.SendPlacementDetailsDto;
+import com.app.dto.StudentDto;
 import com.app.dto.SuccessMessageDto;
 import com.app.pojos.Credential;
 import com.app.pojos.Project;
@@ -46,13 +48,15 @@ public interface IStudentService {
 
 	 
 	 // add qustion
-	 SuccessMessageDto addQuestion(int cid,Question question);
+	 SuccessMessageDto addQuestion(QuestionDto questionDto);
 	 
 	 // download image
 	 StudentPhoto downloadPhoto(int sid);
 	 
 	 public List<Student> findAllStudent();
 	 // update student detail
-	 SuccessMessageDto updateStudentDetails(Student std);
+	 SuccessMessageDto updateStudentDetails(StudentDto std);
+
+	Student getStudentUsingId(int id);
 
 }

@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,7 +25,9 @@ import com.app.dao.CourseRepository;
 import com.app.dao.CredentialRepository;
 import com.app.dao.StudentRepository;
 import com.app.dto.DtoToInsertPlacementDetails;
+import com.app.dto.QuestionDto;
 import com.app.dto.SendPlacementDetailsDto;
+import com.app.dto.StudentDto;
 import com.app.dto.SuccessMessageDto;
 import com.app.pojos.Company;
 import com.app.pojos.Course;
@@ -58,8 +60,6 @@ public class StudentService implements IStudentService {
 	@Autowired
 	private AdminRepository adminRepo;
 	
-	@Autowired
-	EntityManager manager;
 	
 
 	@Override
@@ -207,8 +207,11 @@ public class StudentService implements IStudentService {
 
 	// add the qustion to any company
 	@Override
-	public SuccessMessageDto addQuestion(int cid, Question question) {
-		companyRepo.findById(cid).get().getQuestions().add(question);
+	public SuccessMessageDto addQuestion(QuestionDto questionDto) {
+		System.out.println("company "+questionDto.getCompanyName()+" que"+questionDto.getQuestion());
+		Company company = companyRepo.findByName(questionDto.getCompanyName().toUpperCase());
+		System.out.println("company "+company);
+		company.getQuestions().add(new Question(questionDto.getQuestion()));
 		return new SuccessMessageDto("question iserted successfully");
 	}
 
@@ -220,10 +223,21 @@ public class StudentService implements IStudentService {
 	}
 
 	@Override
-	public SuccessMessageDto updateStudentDetails(Student std) {
+	public SuccessMessageDto updateStudentDetails(StudentDto std) {
+		Student student = studentRepo.findById(std.getId()).get();
+		// use bean utils to set the properties
+		
+		BeanUtils.copyProperties(std, student);
+		studentRepo.save(student);
 		// merge used to merge details or else save updates completely
-		manager.merge(std);
+//		manager.merge(student);
 		return new SuccessMessageDto("Student details updated successfully");
+	}
+
+	@Override
+	public Student getStudentUsingId(int id) {
+		
+		return studentRepo.findById(id).get();
 	}
 
 }

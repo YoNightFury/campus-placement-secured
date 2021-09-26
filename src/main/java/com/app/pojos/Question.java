@@ -23,7 +23,9 @@ public class Question extends BaseEntity {
 	public Question() {
 		System.out.println("Question.Question()");
 	}
-
+	public Question(String que) {
+		question=que;
+	}
 	
 
 }

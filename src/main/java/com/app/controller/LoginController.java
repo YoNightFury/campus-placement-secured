@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.dto.LoginDto;
 import com.app.pojos.BaseEntity;
 import com.app.pojos.Credential;
 import com.app.security.utils.JwtUtils;
@@ -29,12 +30,14 @@ public class LoginController {
 		@PostMapping("/login")
 		public ResponseEntity<?> validateLogin(@RequestBody Credential credential) {
 			Object user = studentService.validateLogin(credential);
-			System.out.println("name "+credential.getUserName()+ " pass "+credential.getPassword()+" role"+credential.getRole());
+//			System.out.println("name "+credential.getUserName()+ " pass "+credential.getPassword()+" role"+credential.getRole());
 			String jwt = jwtUtils.generateJwt(((BaseEntity)user).getId(), credential.getUserName(), credential.getRole());
+			LoginDto login = new LoginDto();
+			login.setJwt(jwt);
+			login.setUser(user);
 			return ResponseEntity
 					.status(HttpStatus.ACCEPTED) // valid cred
-					.header("Authorization", jwt) // pass the jwt
-					.body(user); // response object student or admin
+					.body(login);
 		}
 	
 }

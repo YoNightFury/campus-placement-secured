@@ -79,7 +79,7 @@ public class JwtUtils {
 		String bearerToken = req.getHeader("Authorization");
 		// Bearer 234i2ub53252b54jib325434#$%j4n3534b
 		// if it is null then set cannot set security context maybe a guest user
-
+		System.out.println("sadasasda"+bearerToken);
 		if (StringUtils.hasText(bearerToken)) {
 			jwt = bearerToken.substring(7);
 		}

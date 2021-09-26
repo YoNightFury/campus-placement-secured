@@ -39,6 +39,13 @@ public class PublicController {
 	public List<Student> findAllStudent() {
 		return studentService.findAllStudent();
 	}
+	
+	// implemented
+	@GetMapping("/profile/{id}")
+	public ResponseEntity<?> showProfile(@PathVariable int id) {
+		return ResponseEntity.ok(studentService.getStudentUsingId(id));
+
+	}
 
 	// find all the project of any particular student
 	// url="http://localhost:8080/public/fetch/project/{sid}"
