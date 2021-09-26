@@ -68,7 +68,7 @@ public class StudentController {
 
 	// store placement details
 	// url="http://localhost:8080/student/add/placement/{sid}"
-	@PostMapping("add/placement/{sid}")
+	@PostMapping("/add/placement/{sid}")
 	public ResponseEntity<?> studentPlacement(@PathVariable int sid,
 			@RequestBody DtoToInsertPlacementDetails placementDto) {
 		return ResponseEntity.ok(studentService.addStudentPlacement(sid, placementDto));

@@ -46,9 +46,7 @@ public class JwtUtils {
 	public String generateJwt(Integer id, String username, Role role) {
 		Map<String, Object> claims = new HashMap<>();
 
-		if (username == null)
-			claims.put("isRegistering", true);
-		else if (role == Role.ADMIN)
+		if (role == Role.ADMIN)
 			claims.put("isAdmin", true);
 		else if (role == Role.STUDENT)
 			claims.put("isStudent", true);

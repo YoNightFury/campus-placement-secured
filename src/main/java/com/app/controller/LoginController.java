@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.pojos.BaseEntity;
 import com.app.pojos.Credential;
-import com.app.pojos.Student;
 import com.app.security.utils.JwtUtils;
 import com.app.service.IStudentService;
 
@@ -28,12 +28,12 @@ public class LoginController {
 	// for user login authentication
 		@PostMapping("/login")
 		public ResponseEntity<?> validateLogin(@RequestBody Credential credential) {
-			Student student = studentService.validateLogin(credential);
-			String jwt = jwtUtils.generateJwt(student.getId(), credential.getUserName(), credential.getRole());
+			Object user = studentService.validateLogin(credential);
+			String jwt = jwtUtils.generateJwt(((BaseEntity)user).getId(), credential.getUserName(), credential.getRole());
 			return ResponseEntity
 					.status(HttpStatus.ACCEPTED) // valid cred
 					.header("Authorization", jwt) // pass the jwt
-					.body(student); // response student object
+					.body(user); // response object student or admin
 		}
 	
 }

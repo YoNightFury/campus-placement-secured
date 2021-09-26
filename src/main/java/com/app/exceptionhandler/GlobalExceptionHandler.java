@@ -33,6 +33,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
 		e.printStackTrace();
 		ErrorResponse errorResponse = new ErrorResponse();
 	    errorResponse.setMessage("Unable to Full full the request ! SORRY TRY AGAIN AFTER SOME TIME") ;
+	    errorResponse.setTimestamp(LocalDateTime.now());
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
 	}
 	
