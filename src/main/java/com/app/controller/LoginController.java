@@ -29,6 +29,7 @@ public class LoginController {
 		@PostMapping("/login")
 		public ResponseEntity<?> validateLogin(@RequestBody Credential credential) {
 			Object user = studentService.validateLogin(credential);
+			System.out.println("name "+credential.getUserName()+ " pass "+credential.getPassword()+" role"+credential.getRole());
 			String jwt = jwtUtils.generateJwt(((BaseEntity)user).getId(), credential.getUserName(), credential.getRole());
 			return ResponseEntity
 					.status(HttpStatus.ACCEPTED) // valid cred

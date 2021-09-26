@@ -2,11 +2,14 @@ package com.app.controller;
 
 import java.io.IOException;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.app.dto.DtoToInsertPlacementDetails;
 import com.app.pojos.Project;
 import com.app.pojos.Question;
+import com.app.pojos.Student;
 import com.app.service.IStudentService;
 
 @RestController
@@ -80,6 +84,15 @@ public class StudentController {
 	public ResponseEntity<?> insertQuestion(@PathVariable int cid, @RequestBody Question quetion) {
 		return ResponseEntity.ok(studentService.addQuestion(cid, quetion));
 	}
+	
+	  /**
+	   * update  operatoin on the data base--------------------------------------------------------------------------------------------------
+	   */
+	   
+	   @PutMapping("/updateDetails")
+	   public ResponseEntity<?>  updateStudetntDetails(@RequestBody @Valid Student student){
+		   return ResponseEntity.ok(studentService.updateStudentDetails(student));
+	   }
 	
 	/*-----------------------------------------------------------------------------------------------------------------------------------
 	                                                                     *  student data fetching part* */

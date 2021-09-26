@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.app.custom_exception.CourseNotFoundException;
+import com.app.custom_exception.InvalidCompanyException;
 import com.app.custom_exception.InvalidCredentialException;
 import com.app.dao.AdminRepository;
 import com.app.dao.CompanyRepository;
@@ -25,6 +27,7 @@ import com.app.dao.StudentRepository;
 import com.app.dto.DtoToInsertPlacementDetails;
 import com.app.dto.SendPlacementDetailsDto;
 import com.app.dto.SuccessMessageDto;
+import com.app.pojos.Company;
 import com.app.pojos.Course;
 import com.app.pojos.Credential;
 import com.app.pojos.PlacementDetails;
@@ -51,9 +54,13 @@ public class StudentService implements IStudentService {
 
 	@Autowired
 	private CompanyRepository companyRepo;
-	
+
 	@Autowired
 	private AdminRepository adminRepo;
+	
+	@Autowired
+	EntityManager manager;
+	
 
 	@Override
 	public SuccessMessageDto studentRegister(Student student) {
@@ -133,14 +140,18 @@ public class StudentService implements IStudentService {
 		PlacementDetails transientPlacementDetais = new PlacementDetails();
 		transientPlacementDetais.setIsSelected(SelectionStatus.valueOf(placementDetails.getIsSelected().toUpperCase()));
 		transientPlacementDetais.setRound(Round.valueOf(placementDetails.getRound().toUpperCase()));
-		transientPlacementDetais.setCompany(companyRepo.findByName(placementDetails.getCompanyName().toUpperCase()));
+		// if the company is null
+		Company company = companyRepo.findByName(placementDetails.getCompanyName().toUpperCase());
+		if (company == null)
+			throw new InvalidCompanyException("Invalid Company Name, Company Not Found!!");
+		transientPlacementDetais.setCompany(company);
 
 		// insert the RECORD
 		Student student = studentRepo.findById(sid).get();
 		student.getPlacementDetails().add(transientPlacementDetais);
 		studentRepo.save(student);
 
-		return new SuccessMessageDto("student placement datials is added successfully");
+		return new SuccessMessageDto("student placement details is added successfully");
 	}
 
 	// get all project
@@ -206,6 +217,13 @@ public class StudentService implements IStudentService {
 	public List<Student> findAllStudent() {
 		// TODO Auto-generated method stub
 		return studentRepo.findAll();
+	}
+
+	@Override
+	public SuccessMessageDto updateStudentDetails(Student std) {
+		// merge used to merge details or else save updates completely
+		manager.merge(std);
+		return new SuccessMessageDto("Student details updated successfully");
 	}
 
 }
