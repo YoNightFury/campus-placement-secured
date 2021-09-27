@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.app.custom_exception.InvalidDataException;
 import com.app.dto.DtoToInsertPlacementDetails;
 import com.app.dto.QuestionDto;
 import com.app.dto.StudentDto;
@@ -30,8 +31,7 @@ public class StudentController {
 
 	@Autowired
 	private IStudentService studentService;
-	
-	
+
 	@Autowired
 	private JwtUtils jwtUtils;
 
@@ -48,7 +48,7 @@ public class StudentController {
 	// store project details
 //url="http://localhost:8080/student/add/project/{sid}"
 	@PostMapping("/add/project")
-	public ResponseEntity<?> studentProject( @RequestBody Project project, HttpServletRequest req) {
+	public ResponseEntity<?> studentProject(@RequestBody Project project, HttpServletRequest req) {
 		String jwt = jwtUtils.extractJwtFromRequest(req);
 
 		return ResponseEntity.ok(studentService.addStudentProject(jwtUtils.getUserIdFromJwt(jwt), project));
@@ -57,8 +57,12 @@ public class StudentController {
 	// store student resume into the data base
 	// url="http://localhost:8080/student/add/resume/{sid}"
 	@PostMapping("/add/resume")
-	public ResponseEntity<?> studentResume( @RequestParam MultipartFile studentResume, HttpServletRequest req)
+	public ResponseEntity<?> studentResume(@RequestParam MultipartFile studentResume, HttpServletRequest req)
 			throws IOException {
+		String fileName = studentResume.getOriginalFilename();
+		if (!fileName.endsWith(".pdf"))
+			throw new InvalidDataException("File is Not a pdf Try Again");
+
 		String jwt = jwtUtils.extractJwtFromRequest(req);
 		// create resume class instance and set the property by fetching multipart file
 		// and then store the resume instance
@@ -82,7 +86,8 @@ public class StudentController {
 	// store placement details
 	// url="http://localhost:8080/student/add/placement/{sid}"
 	@PostMapping("/add/placement")
-	public ResponseEntity<?> studentPlacement(@RequestBody DtoToInsertPlacementDetails placementDto,HttpServletRequest req ) {
+	public ResponseEntity<?> studentPlacement(@RequestBody DtoToInsertPlacementDetails placementDto,
+			HttpServletRequest req) {
 		String jwt = jwtUtils.extractJwtFromRequest(req);
 		return ResponseEntity.ok(studentService.addStudentPlacement(jwtUtils.getUserIdFromJwt(jwt), placementDto));
 	}
@@ -94,19 +99,20 @@ public class StudentController {
 
 		return ResponseEntity.ok(studentService.addQuestion(question));
 	}
-	
-	  /**
-	   * update  operatoin on the data base--------------------------------------------------------------------------------------------------
-	   */
-	   
-	   @PutMapping("/update/details")
-	   public ResponseEntity<?>  updateStudetntDetails(@RequestBody StudentDto student, HttpServletRequest req){
-		   String jwt = jwtUtils.extractJwtFromRequest(req);
-		   int id = jwtUtils.getUserIdFromJwt(jwt);
-		   student.setId(id);
-		   return ResponseEntity.ok(studentService.updateStudentDetails(student));
-	   }
-	
+
+	/**
+	 * update operatoin on the data
+	 * base--------------------------------------------------------------------------------------------------
+	 */
+
+	@PutMapping("/update/details")
+	public ResponseEntity<?> updateStudetntDetails(@RequestBody StudentDto student, HttpServletRequest req) {
+		String jwt = jwtUtils.extractJwtFromRequest(req);
+		int id = jwtUtils.getUserIdFromJwt(jwt);
+		student.setId(id);
+		return ResponseEntity.ok(studentService.updateStudentDetails(student));
+	}
+
 	/*-----------------------------------------------------------------------------------------------------------------------------------
 	                                                                     *  student data fetching part* */
 	/**
