@@ -50,16 +50,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 			UsernamePasswordAuthenticationToken userAuthToken = new UsernamePasswordAuthenticationToken(curUser, "",
 					curUser.getAuthorities());
 			SecurityContextHolder.getContext().setAuthentication(userAuthToken);
-			filterChain.doFilter(request, response);
-
-		}else {
-			authEntryPoint.commence(request, response, new AuthenticationCredentialsNotFoundException("Please Login! You have not Logged in!!"));
+			
 		}
 		// spring will check the filters based on the role like /register if any user,
 		// /login for any user
 		// /admin for only admin roles /student for only student roles
 		// to do so call the filterchains method
-
+		filterChain.doFilter(request, response);
+		
 	}
 
 }
