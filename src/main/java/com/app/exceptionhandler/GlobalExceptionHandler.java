@@ -14,6 +14,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import com.app.custom_exception.CourseNotFoundException;
 import com.app.dto.ErrorResponse;
 
+import io.jsonwebtoken.ExpiredJwtException;
+
 
 @ControllerAdvice //mandatory : to tell SC following class contains centralized exc handler method/s
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
@@ -23,6 +25,18 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
 	{
 		e.printStackTrace();
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse(e.getMessage(),LocalDateTime.now()) );
+	
+	}
+	
+	// when user session ends
+	@ExceptionHandler(ExpiredJwtException.class)
+	public ResponseEntity<?> catchJwtExpirationException(ExpiredJwtException e){
+		e.printStackTrace();
+
+		ErrorResponse errorResponse = new ErrorResponse();
+	    errorResponse.setMessage("Your Session is over please login again");
+	    errorResponse.setTimestamp(LocalDateTime.now());
+	    return ResponseEntity.status(HttpStatus.REQUEST_TIMEOUT).body(errorResponse);
 	
 	}
 	
