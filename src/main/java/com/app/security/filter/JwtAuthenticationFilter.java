@@ -8,12 +8,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import com.app.exceptionhandler.AuthEntryPoint;
 import com.app.security.utils.JwtUtils;
 
 @Component
@@ -21,6 +23,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 	@Autowired
 	JwtUtils jwtUtils;
+	
+	@Autowired
+	AuthEntryPoint authEntryPoint;
 
 	/**
 	 * @apiNote will intercept all the authentication request if the user tries to
@@ -45,13 +50,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 			UsernamePasswordAuthenticationToken userAuthToken = new UsernamePasswordAuthenticationToken(curUser, "",
 					curUser.getAuthorities());
 			SecurityContextHolder.getContext().setAuthentication(userAuthToken);
+			filterChain.doFilter(request, response);
 
+		}else {
+			authEntryPoint.commence(request, response, new AuthenticationCredentialsNotFoundException("Please Login! You have not Logged in!!"));
 		}
 		// spring will check the filters based on the role like /register if any user,
 		// /login for any user
 		// /admin for only admin roles /student for only student roles
 		// to do so call the filterchains method
-		filterChain.doFilter(request, response);
 
 	}
 
