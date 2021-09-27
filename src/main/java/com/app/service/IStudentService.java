@@ -31,30 +31,14 @@ public interface IStudentService {
 	public SuccessMessageDto  addStudentPlacement(int sid, DtoToInsertPlacementDetails placementDto);
 
 
-	public List<Project> getAllProject(int sid);
-
-	public StudentResume downloadResume(int sid);
-
-    public	List<SendPlacementDetailsDto> getAllPlacementDetails(int sid);
-
-	public   List<Question> getAllQuestion(int cid);
-
+	
 	//------------------------------------------------------------
 
-	// all fetching method;
-	Object validateLogin(Credential cred);
 	
 	 public SuccessMessageDto studentRegister(Student student);
 
 	 
-	 // add qustion
-	 SuccessMessageDto addQuestion(QuestionDto questionDto);
-	 
-	 // download image
-	 StudentPhoto downloadPhoto(int sid);
-	 
-	 public List<Student> findAllStudent();
-	 // update student detail
+		 // update student detail
 	 SuccessMessageDto updateStudentDetails(StudentDto std);
 
 	Student getStudentUsingId(int id);

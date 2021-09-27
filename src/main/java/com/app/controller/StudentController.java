@@ -22,6 +22,7 @@ import com.app.dto.QuestionDto;
 import com.app.dto.StudentDto;
 import com.app.pojos.Project;
 import com.app.security.utils.JwtUtils;
+import com.app.service.ICompanyService;
 import com.app.service.IStudentService;
 
 @RestController
@@ -32,6 +33,9 @@ public class StudentController {
 
 	@Autowired
 	private IStudentService studentService;
+	
+	@Autowired
+	private ICompanyService companyService;
 
 	@Autowired
 	private JwtUtils jwtUtils;
@@ -104,7 +108,7 @@ public class StudentController {
 	@PostMapping("/add/question/") // cid =company id
 	public ResponseEntity<?> insertQuestion(@RequestBody QuestionDto question) {
 
-		return ResponseEntity.ok(studentService.addQuestion(question));
+		return ResponseEntity.ok(companyService.addQuestion(question));
 	}
 
 	/**

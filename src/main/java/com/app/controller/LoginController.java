@@ -13,6 +13,7 @@ import com.app.pojos.BaseEntity;
 import com.app.pojos.Credential;
 import com.app.security.utils.JwtUtils;
 import com.app.service.IStudentService;
+import com.app.service.IValidationService;
 
 
 @RestController
@@ -23,13 +24,13 @@ public class LoginController {
 	@Autowired
 	JwtUtils jwtUtils;
 	@Autowired
-	IStudentService studentService;
+	IValidationService validateService;
 	
 	
 	// for user login authentication
 		@PostMapping("/login")
 		public ResponseEntity<?> validateLogin(@RequestBody Credential credential) {
-			Object user = studentService.validateLogin(credential);
+			Object user = validateService.validateLogin(credential);
 //			System.out.println("name "+credential.getUserName()+ " pass "+credential.getPassword()+" role"+credential.getRole());
 			String jwt = jwtUtils.generateJwt(((BaseEntity)user).getId(), credential.getUserName(), credential.getRole());
 			LoginDto login = new LoginDto();

@@ -20,6 +20,7 @@ import com.app.pojos.Student;
 import com.app.pojos.StudentResume;
 import com.app.security.utils.JwtUtils;
 import com.app.service.ICompanyService;
+import com.app.service.IPublicService;
 import com.app.service.IStudentService;
 
 @RestController
@@ -36,13 +37,18 @@ public class PublicController {
 	
 	@Autowired
 	ICompanyService companyService;
+	
+	@Autowired
+	IPublicService publicService;
+	
+
 
 	// find all the student based on the year , batch , course
 	// create a student dto to send only requred field
 	// url="http://localhost:8080/public/get/allStudent"
 	@GetMapping("/get/allStudent")
 	public List<Student> findAllStudent() {
-		return studentService.findAllStudent();
+		return publicService.findAllStudent();
 	}
 	
 	// implemented
@@ -56,7 +62,7 @@ public class PublicController {
 	// url="http://localhost:8080/public/fetch/project/{sid}"
 	@GetMapping("/fetch/project/{sid}")
 	public List<Project> getAllProject(@PathVariable int sid) {
-		return studentService.getAllProject(sid);
+		return publicService.getAllProject(sid);
 	}
 
 	// download resume from database
@@ -64,7 +70,7 @@ public class PublicController {
 	// download resume from database
 	@GetMapping("/download/resume/{sid}")
 	public ResponseEntity<?> downloadResume(@PathVariable int sid) throws IOException {
-		StudentResume downloadResume = studentService.downloadResume(sid);
+		StudentResume downloadResume = publicService.downloadResume(sid);
 		System.out.println(downloadResume.getResumeName());
 		System.out.println("in side download Response controller");
 		String encodedString = Base64.getEncoder().encodeToString(downloadResume.getResumeContent());
@@ -91,20 +97,20 @@ public class PublicController {
 	// url="http://localhost:8080/public/fetch/placementdetails/{sid}"
 	@GetMapping("/fetch/placementdetails/{sid}")
 	List<?> getAllPlacementDetails(@PathVariable int sid) {
-		return studentService.getAllPlacementDetails(sid);
+		return publicService.getAllPlacementDetails(sid);
 	}
 
 	// download the photo of the a particular student
 	@GetMapping("/download/photo/{sid}")
 	public ResponseEntity<?> downloadPhoto(@PathVariable int sid) {
-		return ResponseEntity.ok(studentService.downloadPhoto(sid));
+		return ResponseEntity.ok(publicService.downloadPhoto(sid));
 	}
 
 	// find all the question of a particual company
 	// url="http://localhost:8080/public/getall/question/{cid}"
 	@GetMapping("/getall/question/{cid}")
 	public List<Question> getAllQuestion(@PathVariable int cid) {
-		return studentService.getAllQuestion(cid);
+		return companyService.getAllQuestion(cid);
 	}
 
 }
