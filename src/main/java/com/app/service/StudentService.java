@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.app.custom_exception.CourseNotFoundException;
 import com.app.custom_exception.InvalidCompanyException;
 import com.app.custom_exception.InvalidCredentialException;
+import com.app.custom_exception.StudentNotFound;
 import com.app.dao.AdminRepository;
 import com.app.dao.CompanyRepository;
 import com.app.dao.CourseRepository;
@@ -237,7 +238,7 @@ public class StudentService implements IStudentService {
 	@Override
 	public Student getStudentUsingId(int id) {
 		
-		return studentRepo.findById(id).get();
+		return studentRepo.findById(id).orElseThrow(()-> new StudentNotFound());
 	}
 
 }
