@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.app.custom_exception.CourseNotFoundException;
 import com.app.custom_exception.InvalidCompanyException;
 import com.app.custom_exception.InvalidCredentialException;
+import com.app.custom_exception.ResumeNotFoundException;
 import com.app.custom_exception.StudentNotFound;
 import com.app.dao.AdminRepository;
 import com.app.dao.CompanyRepository;
@@ -60,8 +61,6 @@ public class StudentService implements IStudentService {
 
 	@Autowired
 	private AdminRepository adminRepo;
-	
-	
 
 	@Override
 	public SuccessMessageDto studentRegister(Student student) {
@@ -167,7 +166,7 @@ public class StudentService implements IStudentService {
 	@Override
 	public StudentResume downloadResume(int sid) {
 
-		return studentRepo.findByIdWithResume(sid).get().getResume();
+		return studentRepo.findByIdWithResume(sid).orElseThrow(ResumeNotFoundException::getException).getResume();
 	}
 
 	// download the photo
@@ -209,9 +208,9 @@ public class StudentService implements IStudentService {
 	// add the qustion to any company
 	@Override
 	public SuccessMessageDto addQuestion(QuestionDto questionDto) {
-		System.out.println("company "+questionDto.getCompanyName()+" que"+questionDto.getQuestion());
+		System.out.println("company " + questionDto.getCompanyName() + " que" + questionDto.getQuestion());
 		Company company = companyRepo.findByName(questionDto.getCompanyName().toUpperCase());
-		System.out.println("company "+company);
+		System.out.println("company " + company);
 		company.getQuestions().add(new Question(questionDto.getQuestion()));
 		return new SuccessMessageDto("question iserted successfully");
 	}
@@ -227,7 +226,7 @@ public class StudentService implements IStudentService {
 	public SuccessMessageDto updateStudentDetails(StudentDto std) {
 		Student student = studentRepo.findById(std.getId()).get();
 		// use bean utils to set the properties
-		
+
 		BeanUtils.copyProperties(std, student);
 		studentRepo.save(student);
 		// merge used to merge details or else save updates completely
@@ -237,8 +236,8 @@ public class StudentService implements IStudentService {
 
 	@Override
 	public Student getStudentUsingId(int id) {
-		
-		return studentRepo.findById(id).orElseThrow(()-> new StudentNotFound());
+
+		return studentRepo.findById(id).orElseThrow(() -> new StudentNotFound());
 	}
 
 }
