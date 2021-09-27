@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.app.custom_exception.CourseNotFoundException;
 import com.app.custom_exception.InvalidCompanyException;
 import com.app.custom_exception.InvalidCredentialException;
+import com.app.custom_exception.PhotoNotFoundException;
 import com.app.custom_exception.ResumeNotFoundException;
 import com.app.custom_exception.StudentNotFound;
 import com.app.dao.AdminRepository;
@@ -172,7 +173,7 @@ public class StudentService implements IStudentService {
 	// download the photo
 	@Override
 	public StudentPhoto downloadPhoto(int sid) {
-		return studentRepo.findByIdWithPhoto(sid).get().getPhoto();
+		return studentRepo.findByIdWithPhoto(sid).orElseThrow(PhotoNotFoundException::getException).getPhoto();
 	}
 
 	// get all the placement details of a particular student
@@ -237,7 +238,7 @@ public class StudentService implements IStudentService {
 	@Override
 	public Student getStudentUsingId(int id) {
 
-		return studentRepo.findById(id).orElseThrow(() -> new StudentNotFound());
+		return studentRepo.findById(id).orElseThrow(StudentNotFound::getException);
 	}
 
 }
