@@ -20,8 +20,7 @@ import lombok.Setter;
 @Getter
 
 public class Course extends BaseEntity {
-	
-	
+
 	@Enumerated(EnumType.STRING)
 	@Column(length = 20)
 	private CourseName courseName;
@@ -49,7 +48,5 @@ public class Course extends BaseEntity {
 	public Course() {
 		System.out.println("Course.Course()");
 	}
-
-	
 
 }

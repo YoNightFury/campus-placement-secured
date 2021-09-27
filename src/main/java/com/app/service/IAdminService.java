@@ -11,11 +11,10 @@ public interface IAdminService {
 	 * add a new Company
 	 */
 	SuccessMessageDto addCompany(Company company);
-	
+
 	/**
 	 * update company upcoming date
 	 */
 	SuccessMessageDto updateCompany(LocalDate date, String companyName);
-	
-	
+
 }

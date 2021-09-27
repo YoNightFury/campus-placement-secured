@@ -12,33 +12,28 @@ import com.app.dto.LoginDto;
 import com.app.pojos.BaseEntity;
 import com.app.pojos.Credential;
 import com.app.security.utils.JwtUtils;
-import com.app.service.IStudentService;
 import com.app.service.IValidationService;
-
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 public class LoginController {
 
-	
 	@Autowired
 	JwtUtils jwtUtils;
 	@Autowired
 	IValidationService validateService;
-	
-	
+
 	// for user login authentication
-		@PostMapping("/login")
-		public ResponseEntity<?> validateLogin(@RequestBody Credential credential) {
-			Object user = validateService.validateLogin(credential);
+	@PostMapping("/login")
+	public ResponseEntity<?> validateLogin(@RequestBody Credential credential) {
+		Object user = validateService.validateLogin(credential);
 //			System.out.println("name "+credential.getUserName()+ " pass "+credential.getPassword()+" role"+credential.getRole());
-			String jwt = jwtUtils.generateJwt(((BaseEntity)user).getId(), credential.getUserName(), credential.getRole());
-			LoginDto login = new LoginDto();
-			login.setJwt(jwt);
-			login.setUser(user);
-			return ResponseEntity
-					.status(HttpStatus.ACCEPTED) // valid cred
-					.body(login);
-		}
-	
+		String jwt = jwtUtils.generateJwt(((BaseEntity) user).getId(), credential.getUserName(), credential.getRole());
+		LoginDto login = new LoginDto();
+		login.setJwt(jwt);
+		login.setUser(user);
+		return ResponseEntity.status(HttpStatus.ACCEPTED) // valid cred
+				.body(login);
+	}
+
 }

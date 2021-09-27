@@ -21,16 +21,15 @@ import lombok.Setter;
 @Table(name = "companies")
 public class Company extends BaseEntity {
 
-	
 	@Column(length = 100, unique = true)
 	private String name;
 
 	@Column(length = 50, unique = true)
 	private String link;
-    
+
 	@Column(name = "visiting_date")
-	 private LocalDate visitingDate;
-	
+	private LocalDate visitingDate;
+
 	public Company(String name, String link) {
 		this.name = name;
 		this.link = link;
@@ -47,5 +46,4 @@ public class Company extends BaseEntity {
 		System.out.println("Company.Company()");
 	}
 
-	
 }

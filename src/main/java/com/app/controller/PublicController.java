@@ -33,15 +33,12 @@ public class PublicController {
 
 	@Autowired
 	IStudentService studentService;
-	
-	
+
 	@Autowired
 	ICompanyService companyService;
-	
+
 	@Autowired
 	IPublicService publicService;
-	
-
 
 	// find all the student based on the year , batch , course
 	// create a student dto to send only requred field
@@ -50,7 +47,7 @@ public class PublicController {
 	public List<Student> findAllStudent() {
 		return publicService.findAllStudent();
 	}
-	
+
 	// implemented
 	@GetMapping("/profile/{id}")
 	public ResponseEntity<?> showProfile(@PathVariable int id) {
@@ -78,18 +75,17 @@ public class PublicController {
 		return ResponseEntity.status(HttpStatus.FOUND).contentType(MediaType.APPLICATION_PDF).body(resume);
 
 	}
+
 	/**
 	 * 
-	 * @param 
+	 * @param
 	 * @return List of all companies
 	 */
-	
+
 	@GetMapping("/fetch/companies")
-	public ResponseEntity<?> fetchAllCompanies(){
+	public ResponseEntity<?> fetchAllCompanies() {
 		return ResponseEntity.ok(companyService.fetchAllCompanies());
 	}
-	
-	
 
 	// find all the placement details of any particular student
 	// use dto object to store placementDetails and comany name as one object to

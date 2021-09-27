@@ -18,16 +18,16 @@ public class AdminService implements IAdminService {
 
 	@Autowired
 	CompanyRepository companyRepo;
-	
+
 	@Override
 	public SuccessMessageDto addCompany(Company company) {
 		company.setName(company.getName().toUpperCase());
 		try {
-		companyRepo.save(company);
-		}catch (Exception e) {
+			companyRepo.save(company);
+		} catch (Exception e) {
 			throw new InvalidCompanyException("Company already exists!!");
 		}
-		
+
 		return new SuccessMessageDto("Added Company Successfully");
 	}
 
@@ -35,9 +35,9 @@ public class AdminService implements IAdminService {
 	public SuccessMessageDto updateCompany(LocalDate date, String companyName) {
 		Company company = null;
 		try {
-		 company = companyRepo.findByName(companyName.toUpperCase());
-		 company.setVisitingDate(date);
-		}catch(NullPointerException e) {
+			company = companyRepo.findByName(companyName.toUpperCase());
+			company.setVisitingDate(date);
+		} catch (NullPointerException e) {
 			throw new InvalidCompanyException("Cannot Find company!!");
 		}
 		return new SuccessMessageDto("Updated Company Details Successfully!!");

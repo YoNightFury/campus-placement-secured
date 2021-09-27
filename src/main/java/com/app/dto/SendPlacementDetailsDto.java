@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 public class SendPlacementDetailsDto {
 	private String cid;
-	private String  round;
+	private String round;
 	private String isSelected;
 	private String companyName;
 

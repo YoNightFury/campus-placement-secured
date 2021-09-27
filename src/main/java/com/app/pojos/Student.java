@@ -31,25 +31,25 @@ import lombok.Setter;
 public class Student extends BaseEntity {
 
 	// basic detials
-     @NotBlank(message = "First name is mandatory")
+	@NotBlank(message = "First name is mandatory")
 	@Column(name = "first_name", length = 50)
 	private String firstName;
 
-     @NotBlank(message = "Last name is mandatory")
+	@NotBlank(message = "Last name is mandatory")
 	@Column(name = "last_name", length = 50)
 	private String lastName;
 
-	@Column(length = 20,unique=true)
-	 @NotNull(message = "Prn is mandatory")
+	@Column(length = 20, unique = true)
+	@NotNull(message = "Prn is mandatory")
 	private Long prn;
 
 	@Column(name = "dob")
 	@NotNull(message = "Date of birth is mandatory")
-	@Past(message ="Date of Birth must be from past")
+	@Past(message = "Date of Birth must be from past")
 	private LocalDate dob;
 
 	// academic details
-	
+
 	@Column(name = "marks_10th", length = 10)
 	private double mark10th;
 	@Past(message = "10th completeing Date must be from past")
@@ -80,22 +80,22 @@ public class Student extends BaseEntity {
 	@Column(name = "passing_year_post_grad")
 	private LocalDate passingYearPostGrad;
 
-	@Column(name ="marks_ccee", length = 10 )
+	@Column(name = "marks_ccee", length = 10)
 	@NotNull(message = "CCEE mark is completly")
 	@Positive(message = "CCEE mark positive number is allowed")
 	private double markCCEE;
 	// contact details
 
-	@Column(length = 50,unique=true)
+	@Column(length = 50, unique = true)
 	@Email(message = "Email must in email format")
 	private String email;
-	@Column(name = "mob_no", length = 13,unique=true)
+	@Column(name = "mob_no", length = 13, unique = true)
 	private long mobNo;
 	@Column(name = "address", length = 200)
 	private String address;
-	@Column(name = "git_link", length = 100,unique=true)
+	@Column(name = "git_link", length = 100, unique = true)
 	private String gitLink;
-	@Column(name = "linkedin_link", length = 100,unique=true)
+	@Column(name = "linkedin_link", length = 100, unique = true)
 	private String linkedIn;
 
 	// default const
@@ -114,15 +114,15 @@ public class Student extends BaseEntity {
 	// student and credential
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "credential_id")
-	//@JsonIgnore
+	// @JsonIgnore
 	private Credential credential;
-       
-	@JsonIgnore //ignore this property during serilization
+
+	@JsonIgnore // ignore this property during serilization
 	public Credential getCredential() {
 		return credential;
 	}
-	
-	@JsonProperty //DO NOT ignore this property during de-ser
+
+	@JsonProperty // DO NOT ignore this property during de-ser
 	public void setCredential(Credential credential) {
 		this.credential = credential;
 	}
@@ -132,13 +132,12 @@ public class Student extends BaseEntity {
 	@JoinColumn(name = "student_id")
 	@JsonIgnore
 	private List<Project> projects = new ArrayList<>();
-	
-	//student and placement
+
+	// student and placement
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "student_id")
 	@JsonIgnore
 	private List<PlacementDetails> placementDetails = new ArrayList<>();
-
 
 	// student and resume
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)

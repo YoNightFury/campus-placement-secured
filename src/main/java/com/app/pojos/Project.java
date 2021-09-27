@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @Getter
 public class Project extends BaseEntity {
-	
+
 	// form 6
 
 	@Column(name = "project_name", length = 100)
@@ -33,5 +33,4 @@ public class Project extends BaseEntity {
 		System.out.println("Project.Project()");
 	}
 
-	
 }

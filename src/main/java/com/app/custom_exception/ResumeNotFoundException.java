@@ -12,11 +12,10 @@ public class ResumeNotFoundException extends RuntimeException {
 	private ResumeNotFoundException(String mseg) {
 		super(mseg);
 	}
-	
+
 	public static ResumeNotFoundException getException() {
-		if(e==null)
-			e= new ResumeNotFoundException(
-					"Resume has not been uploaded by the user yet!!");
+		if (e == null)
+			e = new ResumeNotFoundException("Resume has not been uploaded by the user yet!!");
 		return e;
 	}
 

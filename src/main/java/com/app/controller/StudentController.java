@@ -33,7 +33,7 @@ public class StudentController {
 
 	@Autowired
 	private IStudentService studentService;
-	
+
 	@Autowired
 	private ICompanyService companyService;
 
@@ -81,9 +81,9 @@ public class StudentController {
 	@PostMapping("/add/photo/")
 	public ResponseEntity<?> studentPhoto(@RequestParam MultipartFile studentPhoto, HttpServletRequest req)
 			throws IOException {
-		// throw error if the file is not a photo 
+		// throw error if the file is not a photo
 		String fileName = studentPhoto.getOriginalFilename();
-		 Pattern pattern = Pattern.compile(".+\\.(jpe?g)$");
+		Pattern pattern = Pattern.compile(".+\\.(jpe?g)$");
 		if (!pattern.matcher(fileName).matches())
 			throw new InvalidDataException("File is Not a valid image Try Again with jpg or jpeg");
 		// create Photo class instance and set the property by fetching multipart file

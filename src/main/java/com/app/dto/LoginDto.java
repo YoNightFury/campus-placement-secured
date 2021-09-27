@@ -10,8 +10,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class LoginDto {
-	
+
 	private Object user;
 	private String jwt;
-	
+
 }

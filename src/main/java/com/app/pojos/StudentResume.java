@@ -12,23 +12,20 @@ import lombok.Setter;
 @Getter
 public class StudentResume extends BaseEntity {
 
-	@Column(name = "resume_name",length = 50 )
-	 private String resumeName;
+	@Column(name = "resume_name", length = 50)
+	private String resumeName;
 	@Lob
-	 private byte[] resumeContent;
-	 
-	 // default const
+	private byte[] resumeContent;
+
+	// default const
 	public StudentResume() {
 		System.out.println("StudentResume.StudentResume()");
 	}
 
-	
 	public StudentResume(String resumeName, byte[] resumeContent) {
 		super();
 		this.resumeName = resumeName;
 		this.resumeContent = resumeContent;
 	}
-	 
-	
-	 
+
 }

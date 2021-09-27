@@ -19,22 +19,23 @@ import com.app.service.IAdminService;
 @CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/admin")
 public class AdminController {
-	
+
 	/**
 	 * add new company details
 	 */
 	@Autowired
 	IAdminService adminService;
-	
+
 	@PostMapping("/add/company")
-	public ResponseEntity<?> addCompany(@RequestBody Company company){
+	public ResponseEntity<?> addCompany(@RequestBody Company company) {
 		return ResponseEntity.ok(adminService.addCompany(company));
 	}
-	
+
 	@PutMapping("/update/company/date/{companyName}")
-	public ResponseEntity<?> updateUpcomingDateOfCompany(@RequestBody LocalDate date, @PathVariable String companyName){
+	public ResponseEntity<?> updateUpcomingDateOfCompany(@RequestBody LocalDate date,
+			@PathVariable String companyName) {
 		return ResponseEntity.ok(adminService.updateCompany(date, companyName));
-		
+
 	}
 
 }

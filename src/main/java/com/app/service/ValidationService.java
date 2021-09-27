@@ -2,7 +2,10 @@ package com.app.service;
 
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.app.custom_exception.InvalidCredentialException;
 import com.app.dao.AdminRepository;
@@ -10,6 +13,8 @@ import com.app.dao.CredentialRepository;
 import com.app.dao.StudentRepository;
 import com.app.pojos.Credential;
 
+@Service
+@Transactional
 public class ValidationService implements IValidationService {
 
 	@Autowired

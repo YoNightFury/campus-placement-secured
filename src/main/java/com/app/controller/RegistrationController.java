@@ -19,11 +19,10 @@ public class RegistrationController {
 
 	@Autowired
 	IStudentService studentService;
-	
-	
-		// controller to register the student
+
+	// controller to register the student
 	@PostMapping("/registration")
-	public ResponseEntity<?> register(@RequestBody @Valid Student student) {	 
-	   return ResponseEntity.status(HttpStatus.ACCEPTED).body( studentService.studentRegister(student));
+	public ResponseEntity<?> register(@RequestBody @Valid Student student) {
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(studentService.studentRegister(student));
 	}
 }

@@ -12,11 +12,10 @@ public class PhotoNotFoundException extends RuntimeException {
 	private PhotoNotFoundException(String mseg) {
 		super(mseg);
 	}
-	
+
 	public static PhotoNotFoundException getException() {
-		if(e==null)
-			e= new PhotoNotFoundException(
-					"Photo has not been uploaded by the user yet!!");
+		if (e == null)
+			e = new PhotoNotFoundException("Photo has not been uploaded by the user yet!!");
 		return e;
 	}
 

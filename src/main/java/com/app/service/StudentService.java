@@ -5,8 +5,6 @@ import static com.app.CustomCommandLineRunner.RESUME_PATH;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -18,26 +16,17 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.app.custom_exception.CourseNotFoundException;
 import com.app.custom_exception.InvalidCompanyException;
-import com.app.custom_exception.InvalidCredentialException;
-import com.app.custom_exception.PhotoNotFoundException;
-import com.app.custom_exception.ResumeNotFoundException;
 import com.app.custom_exception.StudentNotFound;
-import com.app.dao.AdminRepository;
 import com.app.dao.CompanyRepository;
 import com.app.dao.CourseRepository;
-import com.app.dao.CredentialRepository;
 import com.app.dao.StudentRepository;
 import com.app.dto.DtoToInsertPlacementDetails;
-import com.app.dto.QuestionDto;
-import com.app.dto.SendPlacementDetailsDto;
 import com.app.dto.StudentDto;
 import com.app.dto.SuccessMessageDto;
 import com.app.pojos.Company;
 import com.app.pojos.Course;
-import com.app.pojos.Credential;
 import com.app.pojos.PlacementDetails;
 import com.app.pojos.Project;
-import com.app.pojos.Question;
 import com.app.pojos.Round;
 import com.app.pojos.SelectionStatus;
 import com.app.pojos.Student;
@@ -54,12 +43,8 @@ public class StudentService implements IStudentService {
 	@Autowired
 	private CourseRepository courseRepo;
 
-
-
 	@Autowired
 	private CompanyRepository companyRepo;
-
-
 
 	@Override
 	public SuccessMessageDto studentRegister(Student student) {
@@ -112,8 +97,6 @@ public class StudentService implements IStudentService {
 		studentPhoto.transferTo(new File(PHOTO_PATH + "\\" + studentPhoto.getOriginalFilename()));
 		return sid;
 	}
-
-	
 
 	@Override
 	public SuccessMessageDto addStudentPlacement(int sid, DtoToInsertPlacementDetails placementDetails) {

@@ -14,8 +14,8 @@ import lombok.Setter;
 @Table(name = "questions")
 public class Question extends BaseEntity {
 
-	 // form 7 continution
-	
+	// form 7 continution
+
 	@Column(length = 300)
 	private String question;
 
@@ -23,9 +23,9 @@ public class Question extends BaseEntity {
 	public Question() {
 		System.out.println("Question.Question()");
 	}
+
 	public Question(String que) {
-		question=que;
+		question = que;
 	}
-	
 
 }

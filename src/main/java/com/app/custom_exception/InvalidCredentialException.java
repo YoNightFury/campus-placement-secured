@@ -11,6 +11,4 @@ public class InvalidCredentialException extends RuntimeException {
 		super(message);
 	}
 
-	
-
 }

@@ -6,7 +6,7 @@ import lombok.Setter;
 @Setter
 @Getter
 public class QuestionDto {
-	
+
 	private String question;
 	private String companyName;
 }

@@ -3,12 +3,13 @@ package com.app.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.app.custom_exception.PhotoNotFoundException;
 import com.app.custom_exception.ResumeNotFoundException;
-import com.app.dao.CompanyRepository;
-import com.app.dao.CourseRepository;
 import com.app.dao.StudentRepository;
 import com.app.dto.SendPlacementDetailsDto;
 import com.app.pojos.PlacementDetails;
@@ -17,13 +18,12 @@ import com.app.pojos.Student;
 import com.app.pojos.StudentPhoto;
 import com.app.pojos.StudentResume;
 
+@Service
+@Transactional
 public class PublicService implements IPublicService {
 
 	@Autowired
 	private StudentRepository studentRepo;
-
-
-
 
 	// get all project
 	@Override
@@ -69,10 +69,6 @@ public class PublicService implements IPublicService {
 		// return that populated list
 		return placementDetailsOfStudent;
 	}
-
-	
-
-
 
 	// return all the list of student
 	@Override

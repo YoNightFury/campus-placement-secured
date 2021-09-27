@@ -18,10 +18,10 @@ import lombok.Setter;
 @Entity
 @Table(name = "placement_details")
 public class PlacementDetails extends BaseEntity {
-	
+
 	// form 7
 
-	@Column(length =15)
+	@Column(length = 15)
 	@Enumerated(EnumType.STRING)
 	private Round round;
 
@@ -36,9 +36,7 @@ public class PlacementDetails extends BaseEntity {
 
 	// associaton
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "company_id" )
+	@JoinColumn(name = "company_id")
 	private Company company;
-
-	
 
 }

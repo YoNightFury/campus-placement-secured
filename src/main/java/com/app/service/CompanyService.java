@@ -20,28 +20,27 @@ public class CompanyService implements ICompanyService {
 
 	@Autowired
 	CompanyRepository companyRepo;
-	
+
 	@Override
 	public List<String> fetchAllCompanies() {
 		return companyRepo.findAllName();
 	}
-	
-	// get all the question based on company
-		@Override
-		public List<Question> getAllQuestion(int cid) {
-			return companyRepo.findById(cid).get().getQuestions();
-		}
 
-		
-		// add the qustion to any company
-		@Override
-		public SuccessMessageDto addQuestion(QuestionDto questionDto) {
-			System.out.println("company " + questionDto.getCompanyName() + " que" + questionDto.getQuestion());
-			Company company = companyRepo.findByName(questionDto.getCompanyName().toUpperCase());
-			if(company==null)
-				throw new InvalidCompanyException("Invalid Company Name, Company Not Found!!");
-			System.out.println("company " + company);
-			company.getQuestions().add(new Question(questionDto.getQuestion()));
-			return new SuccessMessageDto("question inserted successfully");
-		}
+	// get all the question based on company
+	@Override
+	public List<Question> getAllQuestion(int cid) {
+		return companyRepo.findById(cid).get().getQuestions();
+	}
+
+	// add the qustion to any company
+	@Override
+	public SuccessMessageDto addQuestion(QuestionDto questionDto) {
+		System.out.println("company " + questionDto.getCompanyName() + " que" + questionDto.getQuestion());
+		Company company = companyRepo.findByName(questionDto.getCompanyName().toUpperCase());
+		if (company == null)
+			throw new InvalidCompanyException("Invalid Company Name, Company Not Found!!");
+		System.out.println("company " + company);
+		company.getQuestions().add(new Question(questionDto.getQuestion()));
+		return new SuccessMessageDto("question inserted successfully");
+	}
 }

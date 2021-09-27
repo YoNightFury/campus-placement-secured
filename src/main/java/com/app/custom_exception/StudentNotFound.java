@@ -1,6 +1,6 @@
 package com.app.custom_exception;
 
-public class StudentNotFound extends RuntimeException{
+public class StudentNotFound extends RuntimeException {
 	/**
 	 * 
 	 */
@@ -11,11 +11,10 @@ public class StudentNotFound extends RuntimeException{
 	private StudentNotFound(String mseg) {
 		super(mseg);
 	}
-	
+
 	public static StudentNotFound getException() {
-		if(e==null)
-			e= new StudentNotFound(
-					"Cannot find the Student!!");
+		if (e == null)
+			e = new StudentNotFound("Cannot find the Student!!");
 		return e;
 	}
 }

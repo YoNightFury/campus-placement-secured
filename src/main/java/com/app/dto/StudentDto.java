@@ -9,13 +9,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class StudentDto {
-	
+
 	private Integer id;
 	private String firstName;
 
@@ -23,7 +22,6 @@ public class StudentDto {
 
 	private LocalDate dob;
 
-	
 	private double mark10th;
 	private LocalDate passingYear10th;
 

@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,7 +22,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 	@Autowired
 	JwtUtils jwtUtils;
-	
+
 	@Autowired
 	AuthEntryPoint authEntryPoint;
 
@@ -50,14 +49,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 			UsernamePasswordAuthenticationToken userAuthToken = new UsernamePasswordAuthenticationToken(curUser, "",
 					curUser.getAuthorities());
 			SecurityContextHolder.getContext().setAuthentication(userAuthToken);
-			
+
 		}
 		// spring will check the filters based on the role like /register if any user,
 		// /login for any user
 		// /admin for only admin roles /student for only student roles
 		// to do so call the filterchains method
 		filterChain.doFilter(request, response);
-		
+
 	}
 
 }

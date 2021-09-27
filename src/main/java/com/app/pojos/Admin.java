@@ -14,7 +14,7 @@ import lombok.Setter;
 @Setter
 @Getter
 public class Admin extends BaseEntity {
-   
+
 	@Column(name = "admin_name", length = 50)
 	private String adminName;
 	@Column(name = "email", length = 50)
@@ -39,7 +39,5 @@ public class Admin extends BaseEntity {
 	public Admin() {
 		System.out.println("Admin.Admin()");
 	}
-
-
 
 }

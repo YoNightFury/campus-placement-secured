@@ -14,11 +14,10 @@ import lombok.Setter;
 public class ErrorResponse {
 	private String message;
 	private LocalDateTime timestamp;
+
 	public ErrorResponse(String message) {
 		super();
 		this.message = message;
 	}
-	
-	
-	
+
 }
