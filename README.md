@@ -45,4 +45,4 @@ jwt.jwtExpirationInMs=expiration time for the key
 
 ---------------------------------------------------
 
-look for whitespaces in appilcation.properties an remove them
+look for whitespaces in appilcation.properties and remove them
