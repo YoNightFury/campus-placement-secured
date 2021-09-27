@@ -1,6 +1,7 @@
 package com.app.controller;
 
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -59,6 +60,7 @@ public class StudentController {
 	@PostMapping("/add/resume")
 	public ResponseEntity<?> studentResume(@RequestParam MultipartFile studentResume, HttpServletRequest req)
 			throws IOException {
+		// throw error if the file is not a pdf
 		String fileName = studentResume.getOriginalFilename();
 		if (!fileName.endsWith(".pdf"))
 			throw new InvalidDataException("File is Not a pdf Try Again");
@@ -75,6 +77,11 @@ public class StudentController {
 	@PostMapping("/add/photo/")
 	public ResponseEntity<?> studentPhoto(@RequestParam MultipartFile studentPhoto, HttpServletRequest req)
 			throws IOException {
+		// throw error if the file is not a photo 
+		String fileName = studentPhoto.getOriginalFilename();
+		 Pattern pattern = Pattern.compile(".+\\.(jpe?g)$");
+		if (!pattern.matcher(fileName).matches())
+			throw new InvalidDataException("File is Not a valid image Try Again with jpg or jpeg");
 		// create Photo class instance and set the property by fetching multipart file
 		// and then store the Photo instance
 		// in the database
