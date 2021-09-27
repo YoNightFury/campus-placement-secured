@@ -125,9 +125,6 @@ public class StudentService implements IStudentService {
 		// use bean utils to set the properties
 
 		BeanUtils.copyProperties(std, student);
-		studentRepo.save(student);
-		// merge used to merge details or else save updates completely
-//		manager.merge(student);
 		return new SuccessMessageDto("Student details updated successfully");
 	}
 
