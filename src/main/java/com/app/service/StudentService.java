@@ -211,9 +211,11 @@ public class StudentService implements IStudentService {
 	public SuccessMessageDto addQuestion(QuestionDto questionDto) {
 		System.out.println("company " + questionDto.getCompanyName() + " que" + questionDto.getQuestion());
 		Company company = companyRepo.findByName(questionDto.getCompanyName().toUpperCase());
+		if(company==null)
+			throw new InvalidCompanyException("Invalid Company Name, Company Not Found!!");
 		System.out.println("company " + company);
 		company.getQuestions().add(new Question(questionDto.getQuestion()));
-		return new SuccessMessageDto("question iserted successfully");
+		return new SuccessMessageDto("question inserted successfully");
 	}
 
 	// return all the list of student
