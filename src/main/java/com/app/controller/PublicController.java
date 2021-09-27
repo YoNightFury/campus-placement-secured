@@ -19,6 +19,7 @@ import com.app.pojos.Question;
 import com.app.pojos.Student;
 import com.app.pojos.StudentResume;
 import com.app.security.utils.JwtUtils;
+import com.app.service.ICompanyService;
 import com.app.service.IStudentService;
 
 @RestController
@@ -31,6 +32,10 @@ public class PublicController {
 
 	@Autowired
 	IStudentService studentService;
+	
+	
+	@Autowired
+	ICompanyService companyService;
 
 	// find all the student based on the year , batch , course
 	// create a student dto to send only requred field
@@ -67,6 +72,18 @@ public class PublicController {
 		return ResponseEntity.status(HttpStatus.FOUND).contentType(MediaType.APPLICATION_PDF).body(resume);
 
 	}
+	/**
+	 * 
+	 * @param 
+	 * @return List of all companies
+	 */
+	
+	@GetMapping("/fetch/companies")
+	public ResponseEntity<?> fetchAllCompanies(){
+		return ResponseEntity.ok(companyService.fetchAllCompanies());
+	}
+	
+	
 
 	// find all the placement details of any particular student
 	// use dto object to store placementDetails and comany name as one object to

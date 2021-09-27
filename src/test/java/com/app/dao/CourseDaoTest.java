@@ -30,12 +30,12 @@ public class CourseDaoTest {
 		List <Course> course = new ArrayList<>();
 		for(Batch b : Batch.values()) {
 			for(CourseName cn : CourseName.values()) {
-				for(int year=2016,i=0;i<4;i++,year++)
+				for(int year=2020,i=0;i<4;i++,year++)
 					course.add(new Course(cn,b,year));
 			}
 		}
 		
-		
+		// courses added from 2016 to 2024
 //		List<Course> list = courseRepo.saveAll(course);
 //		assertEquals(list.size(),course.size());
 		
