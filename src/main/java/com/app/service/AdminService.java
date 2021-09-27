@@ -1,5 +1,7 @@
 package com.app.service;
 
+import java.time.LocalDate;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,18 @@ public class AdminService implements IAdminService {
 		}
 		
 		return new SuccessMessageDto("Added Company Successfully");
+	}
+
+	@Override
+	public SuccessMessageDto updateCompany(LocalDate date, String companyName) {
+		Company company = null;
+		try {
+		 company = companyRepo.findByName(companyName.toUpperCase());
+		 company.setVisitingDate(date);
+		}catch(NullPointerException e) {
+			throw new InvalidCompanyException("Cannot Find company!!");
+		}
+		return new SuccessMessageDto("Updated Company Details Successfully!!");
 	}
 
 }
