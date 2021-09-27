@@ -10,16 +10,16 @@ add the following in the application.properties
 
 #server.port=7070 can uncomment this to make custom port for your server
 
-# context path default value : empty
-# server.servlet.context-path=/
-# DB properties
+#context path default value : empty
+#server.servlet.context-path=/
+#DB properties
 spring.datasource.url=jdbc:mysql://localhost:3306/project?useSSL=false&allowPublicKeyRetrieval=true
 
 spring.datasource.username=your mysql username
 
 spring.datasource.password=your mysql password
 
-# JPA properties
+#JPA properties
 
 spring.jpa.show-sql = true
 
@@ -36,7 +36,7 @@ spring.servlet.multipart.enabled=true
 
 spring.servlet.multipart.location=${java.io.tmpdir} will save the recieved files here but has logic to transfer to a readable location
 
-# springsecurity 
+#springsecurity 
 
 jwt.secret=your secret key
 
