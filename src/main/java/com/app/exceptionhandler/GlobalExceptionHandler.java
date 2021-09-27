@@ -32,7 +32,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
 	public ResponseEntity<?> catchAllException(RuntimeException e){
 		e.printStackTrace();
 		ErrorResponse errorResponse = new ErrorResponse();
-	    errorResponse.setMessage("Unable to Full full the request ! SORRY TRY AGAIN AFTER SOME TIME") ;
+	    errorResponse.setMessage(e.getLocalizedMessage());
 	    errorResponse.setTimestamp(LocalDateTime.now());
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
 	}
