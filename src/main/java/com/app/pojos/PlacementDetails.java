@@ -35,7 +35,7 @@ public class PlacementDetails extends BaseEntity {
 	}
 
 	// associaton
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name = "company_id")
 	private Company company;
 
