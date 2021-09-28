@@ -17,7 +17,6 @@ public class AuthEntryPoint implements AuthenticationEntryPoint {
 	public void commence(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException authException) throws IOException, ServletException {
 		// send the localised message with unauthorised message
-//		System.out.print("asdasd");
 //		response.sendError(401, authException.getLocalizedMessage());
 		// set the content type
 		// instead set the status

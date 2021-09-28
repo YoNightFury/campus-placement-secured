@@ -18,13 +18,13 @@ import com.app.pojos.Credential;
 public class ValidationService implements IValidationService {
 
 	@Autowired
-	StudentRepository studentRepo;
+	private StudentRepository studentRepo;
 
 	@Autowired
-	AdminRepository adminRepo;
+	private AdminRepository adminRepo;
 
 	@Autowired
-	CredentialRepository credRepo;
+	private CredentialRepository credRepo;
 
 	// validate Student credential
 	@Override

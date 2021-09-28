@@ -26,13 +26,13 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	 */
 
 	@Autowired
-	UserDetailsService userDetailsService;
+	private UserDetailsService userDetailsService;
 
 	/**
 	 * @implNote our custom jwt filter
 	 */
 	@Autowired
-	JwtAuthenticationFilter jwtFilter;
+	private JwtAuthenticationFilter jwtFilter;
 
 	// password encoder provider
 	@Bean
@@ -56,9 +56,9 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	/**
 	 * @implNote first enable the cors policy. disable csrf. configure the role
 	 *           based filters. make session stateless. add our custom jwt
-	 *           authentication before the springs authentication filter class.
-	 *           we will do unauthorised exception handling in exception handler instead
-	 *           of implementing AuthenticationEntryPoint class
+	 *           authentication before the springs authentication filter class. we
+	 *           will do unauthorised exception handling in exception handler
+	 *           instead of implementing AuthenticationEntryPoint class
 	 */
 
 	@Override
@@ -69,7 +69,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.authorizeRequests() //
 				.antMatchers("/admin/**").hasRole("ADMIN") // ADMIN ACCESS
 				.antMatchers("/student/**").hasRole("STUDENT") // STUDENT ACCESS
-				.antMatchers("/registration/**", "/public/**","/login").permitAll() // ALL ACCESS
+				.antMatchers("/registration/**", "/public/**", "/login").permitAll() // ALL ACCESS
 				.anyRequest().authenticated() // all authenticated access
 				// make session stateless
 				.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)//

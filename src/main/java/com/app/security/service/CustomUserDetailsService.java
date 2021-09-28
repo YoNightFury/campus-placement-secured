@@ -21,10 +21,10 @@ import com.app.pojos.Role;
 public class CustomUserDetailsService implements UserDetailsService {
 
 	@Autowired
-	CredentialRepository credRepo;
+	private CredentialRepository credRepo;
 
 	@Autowired
-	PasswordEncoder pEncoder;
+	private PasswordEncoder pEncoder;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

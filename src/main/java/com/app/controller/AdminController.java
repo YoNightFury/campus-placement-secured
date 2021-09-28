@@ -24,7 +24,7 @@ public class AdminController {
 	 * add new company details
 	 */
 	@Autowired
-	IAdminService adminService;
+	private IAdminService adminService;
 
 	@PostMapping("/add/company")
 	public ResponseEntity<?> addCompany(@RequestBody Company company) {

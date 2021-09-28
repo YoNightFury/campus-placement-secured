@@ -18,7 +18,7 @@ import com.app.service.IStudentService;
 public class RegistrationController {
 
 	@Autowired
-	IStudentService studentService;
+	private IStudentService studentService;
 
 	// controller to register the student
 	@PostMapping("/registration")

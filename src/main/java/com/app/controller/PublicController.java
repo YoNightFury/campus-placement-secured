@@ -18,7 +18,6 @@ import com.app.pojos.Project;
 import com.app.pojos.Question;
 import com.app.pojos.Student;
 import com.app.pojos.StudentResume;
-import com.app.security.utils.JwtUtils;
 import com.app.service.ICompanyService;
 import com.app.service.IPublicService;
 import com.app.service.IStudentService;
@@ -29,16 +28,13 @@ import com.app.service.IStudentService;
 public class PublicController {
 
 	@Autowired
-	JwtUtils jwtUtils;
+	private IStudentService studentService;
 
 	@Autowired
-	IStudentService studentService;
+	private ICompanyService companyService;
 
 	@Autowired
-	ICompanyService companyService;
-
-	@Autowired
-	IPublicService publicService;
+	private IPublicService publicService;
 
 	// find all the student based on the year , batch , course
 	// create a student dto to send only requred field

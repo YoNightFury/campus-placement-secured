@@ -19,9 +19,9 @@ import com.app.service.IValidationService;
 public class LoginController {
 
 	@Autowired
-	JwtUtils jwtUtils;
+	private JwtUtils jwtUtils;
 	@Autowired
-	IValidationService validateService;
+	private IValidationService validateService;
 
 	// for user login authentication
 	@PostMapping("/login")

@@ -14,17 +14,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.app.exceptionhandler.AuthEntryPoint;
 import com.app.security.utils.JwtUtils;
 
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 	@Autowired
-	JwtUtils jwtUtils;
+	private JwtUtils jwtUtils;
 
-	@Autowired
-	AuthEntryPoint authEntryPoint;
 
 	/**
 	 * @apiNote will intercept all the authentication request if the user tries to

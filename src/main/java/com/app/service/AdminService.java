@@ -17,7 +17,7 @@ import com.app.pojos.Company;
 public class AdminService implements IAdminService {
 
 	@Autowired
-	CompanyRepository companyRepo;
+	private CompanyRepository companyRepo;
 
 	@Override
 	public SuccessMessageDto addCompany(Company company) {

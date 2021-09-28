@@ -19,7 +19,7 @@ import com.app.pojos.Question;
 public class CompanyService implements ICompanyService {
 
 	@Autowired
-	CompanyRepository companyRepo;
+	private CompanyRepository companyRepo;
 
 	@Override
 	public List<String> fetchAllCompanies() {
