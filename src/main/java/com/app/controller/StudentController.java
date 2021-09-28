@@ -6,8 +6,10 @@ import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -122,6 +124,13 @@ public class StudentController {
 		int id = jwtUtils.getUserIdFromJwt(jwt);
 		student.setId(id);
 		return ResponseEntity.ok(studentService.updateStudentDetails(student));
+	}
+
+	@DeleteMapping("/delete")
+	public ResponseEntity<?> deleteStudent(HttpServletRequest req) {
+		String jwt = jwtUtils.extractJwtFromRequest(req);
+		int id = jwtUtils.getUserIdFromJwt(jwt);
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(studentService.deleteStudent(id));
 	}
 
 	/*-----------------------------------------------------------------------------------------------------------------------------------

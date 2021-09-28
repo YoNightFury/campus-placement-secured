@@ -32,5 +32,9 @@ public interface IStudentService {
 	SuccessMessageDto updateStudentDetails(StudentDto std);
 
 	Student getStudentUsingId(int id);
+	
+	
+	// delete student
+	SuccessMessageDto deleteStudent(int sid);
 
 }

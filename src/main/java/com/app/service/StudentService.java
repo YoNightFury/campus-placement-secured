@@ -133,5 +133,12 @@ public class StudentService implements IStudentService {
 
 		return studentRepo.findById(id).orElseThrow(StudentNotFound::getException);
 	}
+	
+	// delete student
+	@Override
+	public SuccessMessageDto deleteStudent(int sid) {
+		studentRepo.deleteById(sid);
+		return new SuccessMessageDto("Student profile deleted successfully");
+	}
 
 }
