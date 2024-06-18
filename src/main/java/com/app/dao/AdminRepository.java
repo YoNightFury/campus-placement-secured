@@ -9,5 +9,5 @@ import com.app.pojos.Credential;
 
 public interface AdminRepository extends JpaRepository<Admin, Integer> {
 
-	Optional<Admin> findByCredential(Credential cred);
+	Optional<Admin> findByCredentialUserName(String userName);
 }

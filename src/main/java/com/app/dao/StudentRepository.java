@@ -11,8 +11,8 @@ import com.app.pojos.Student;
 
 public interface StudentRepository extends JpaRepository<Student, Integer> {
 
-	@Query("select s from Student s  where s.credential=:cred")
-	Optional<Student> findByCredential(@Param("cred") Credential cred);
+	@Query("select s from Student s  where s.credential.userName=:userName")
+	Optional<Student> findByCredential(@Param("userName") String  userName);
 
 	@Query("select s from Student s join fetch s.resume where s.id=:id")
 	Optional<Student> findByIdWithResume(@Param("id") int id);

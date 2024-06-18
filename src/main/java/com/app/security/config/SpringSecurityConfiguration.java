@@ -33,17 +33,14 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	 */
 	@Autowired
 	private JwtAuthenticationFilter jwtFilter;
-
-	// password encoder provider
-	@Bean
-	public PasswordEncoder getPasswordEncoder() {
-		return new BCryptPasswordEncoder(10);
-	}
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	// tell spring to use our user details service and password encoder
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userDetailsService).passwordEncoder(getPasswordEncoder());
+		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
 	}
 
 	// authenication manager bean

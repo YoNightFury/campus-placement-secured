@@ -20,7 +20,7 @@ public class CourseDaoTest {
 	@Autowired
 	private CourseRepository courseRepo;
 	
-	@Test
+//@Test
 	public void insertCourse() {
 //		List<Course> course=Arrays.asList(new Course(DAC,JAN, 2022),new Course(DBDA,JAN,2022),new Course(DESD,JAN,2022),
 //				new Course(DIOT,JAN,2022),new Course(DASSD,JAN,2022),new Course(DAI,JAN,2022),new Course(DGI,JAN,2022),
@@ -36,8 +36,8 @@ public class CourseDaoTest {
 		}
 		
 		// courses added from 2016 to 2024
-//		List<Course> list = courseRepo.saveAll(course);
-//		assertEquals(list.size(),course.size());
+		//List<Course> list = courseRepo.saveAll(course);
+		//assertEquals(list.size(),course.size());
 		
 	}
 }

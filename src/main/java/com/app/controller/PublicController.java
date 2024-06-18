@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +22,6 @@ import com.app.service.IPublicService;
 import com.app.service.IStudentService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/public")
 public class PublicController {
 
@@ -68,7 +66,7 @@ public class PublicController {
 		System.out.println("in side download Response controller");
 		String encodedString = Base64.getEncoder().encodeToString(downloadResume.getResumeContent());
 		byte[] resume = Base64.getDecoder().decode(encodedString);
-		return ResponseEntity.status(HttpStatus.FOUND).contentType(MediaType.APPLICATION_PDF).body(resume);
+		return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_PDF).body(resume);
 
 	}
 

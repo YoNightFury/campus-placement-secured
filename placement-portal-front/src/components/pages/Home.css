@@ -1,0 +1,39 @@
+.footer{
+    background-color: #004080;
+}
+.footer>div{
+    color: #fff;
+}
+.cdaclogo{
+    align-items:center ;
+    height: 10rem;
+    width: 40rem;
+    
+}
+
+.home,
+.home2 {
+
+  
+  margin-top:-20px;
+  padding: 0;
+  font-size: 3vmin;
+}
+
+.home {
+  background: #151515;
+  color: #fff;
+  overflow: hidden;
+}
+
+.home2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+.home-footer-grid{
+  display:flex;
+  justify-content: center;
+  margin-top: 0.007rem;
+}

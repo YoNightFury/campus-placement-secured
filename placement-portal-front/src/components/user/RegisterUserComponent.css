@@ -1,0 +1,43 @@
+.increase-font{
+    font-size: large;
+    margin-right: 5px;
+}
+
+.increase-font-2{
+    font-size:x-large;
+    /* margin-top: 8px;
+    margin-bottom: 5px; */
+}
+
+/* .in-grid{
+    display: grid;
+   
+} */
+
+.width-control{
+    width:20rem;
+    padding:0.1rem;
+    margin-left: 4px;
+}
+
+.flex-orient{
+    display:flex;
+    justify-content: center;
+}
+
+.edit-grid{
+    display:flex;
+    
+}
+
+.to-up{
+   margin-top: 5rem; 
+}
+
+@media screen and (max-width: 960px){
+    .edit-grid{
+        display:flex;
+        flex-direction: column;
+    }
+
+}

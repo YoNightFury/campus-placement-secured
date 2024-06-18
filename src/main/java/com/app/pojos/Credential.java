@@ -26,9 +26,9 @@ public class Credential extends BaseEntity {
 	private String userName;
 
 	@NotBlank(message = "Password is mandatory")
-	@Size(min = 8, max = 20, message = "Password length must be between 8 and 20")
-	@Pattern(regexp = "((?=.*\\d)(?=.*[A-Z])(?=.*[#@$*]).{5,20})", message = "Password must contain one special character and one capital letter  and one number")
-	@Column(name = "password", length = 20)
+	//@Size(min = 8, max = 20, message = "Password length must be between 8 and 20")
+	//@Pattern(regexp = "((?=.*\\d)(?=.*[A-Z])(?=.*[#@$*]).{5,20})", message = "Password must contain one special character and one capital letter  and one number")
+	@Column(name = "password")
 	private String password;
 
 	@Enumerated(EnumType.STRING)

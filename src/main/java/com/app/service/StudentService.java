@@ -11,6 +11,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -45,12 +46,17 @@ public class StudentService implements IStudentService {
 
 	@Autowired
 	private CompanyRepository companyRepo;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@Override
 	public SuccessMessageDto studentRegister(Student student) {
 		Optional<Course> courseOptional = courseRepo.findByCourseNameAndBatchAndYear(
 				student.getCourse().getCourseName(), student.getCourse().getBatch(), student.getCourse().getYear());
 		Course course = courseOptional.orElseThrow(() -> new CourseNotFoundException("can not the find the course !!"));
+		var credentials = student.getCredential();
+		credentials.setPassword(passwordEncoder.encode(credentials.getPassword()));
 		course.getStudents().add(student);
 		student.setCourse(course);
 		return new SuccessMessageDto("User Registered successfully");
