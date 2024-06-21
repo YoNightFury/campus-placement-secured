@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -33,7 +32,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	 */
 	@Autowired
 	private JwtAuthenticationFilter jwtFilter;
-	
+
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
@@ -67,7 +66,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/admin/**").hasRole("ADMIN") // ADMIN ACCESS
 				.antMatchers("/student/**").hasRole("STUDENT") // STUDENT ACCESS
 				.antMatchers("/registration/**", "/public/**", "/login").permitAll() // ALL ACCESS
-				.anyRequest().authenticated() // all authenticated access
+				.anyRequest().permitAll() // all authenticated access
 				// make session stateless
 				.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)//
 				// configure our custom jwt filter

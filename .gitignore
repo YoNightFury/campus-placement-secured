@@ -14,6 +14,9 @@ target/
 .sts4-cache
 src/main/resources/application.properties
 
+# react build
+src/main/resources/static
+
 ### IntelliJ IDEA ###
 .idea
 *.iws
