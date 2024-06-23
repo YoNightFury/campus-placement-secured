@@ -1,11 +1,8 @@
 /* Requires the Docker Pipeline plugin */
 pipeline {
-    agent {
-        docker {
-            image 'docker'
-            args '-u root -v /var/run/docker.sock:/var/run/docker.sock'
-        }
-    }
+   agent{
+    none
+   }
     stages {
         stage('test'){
             steps{
@@ -13,6 +10,12 @@ pipeline {
             }
         }
         stage('build') {
+            agent {
+                docker {
+                    image 'docker'
+                    args '-u root -v /var/run/docker.sock:/var/run/docker.sock'
+                }
+            }
             steps {
                 script{
                     docker.build("yonightfury/campus-placement:${BUILD_NUMBER}").push()
