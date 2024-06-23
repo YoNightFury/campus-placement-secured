@@ -16,9 +16,9 @@ pipeline {
             }
             steps {
                 script{
-                    def image = docker.build("yonightfury/campus-placement:${BUILD_NUMBER}")
+                    def image = docker.build("yonightfury/campus-placement:${BRACH_NAME}-${BUILD_NUMBER}")
                     if(BRANCH_NAME=="main"){
-                        image.tag("latest")
+                        image.push("latest")
                     }
                     image.push()
                 }
