@@ -41,7 +41,7 @@ pipeline {
                         remote.allowAnyHosts = true
                         sshPut remote: remote, from: "./docker-compose.yaml", into:"./docker-compose.yaml"
                         sshCommand remote: remote, command: "docker compose down"
-                        sshCommand remote: remote, command: "docker compose up"
+                        sshCommand remote: remote, command: "docker compose up -d"
 
                     }
                 }
