@@ -1,8 +1,6 @@
 /* Requires the Docker Pipeline plugin */
 pipeline {
-   agent{
-    none
-   }
+   agent none
     stages {
         stage('test'){
             steps{
