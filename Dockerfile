@@ -15,7 +15,7 @@ COPY mvnw pom.xml ./
 RUN sh ./mvnw dependency:go-offline
 COPY src ./src
 COPY --from=react-build /reactapp/build/ ./src/main/resources/static/
-RUN  sh ./mvnw --offline -e package -DskipTests=true
+RUN  sh ./mvnw -e package -DskipTests=true
 
 # # Create a custom Java runtime
 # RUN $JAVA_HOME/bin/jlink \
