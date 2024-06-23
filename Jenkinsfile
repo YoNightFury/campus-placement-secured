@@ -15,7 +15,7 @@ pipeline {
         stage('build') {
             steps {
                 script{
-                    docker.build("jenkinsdemo:${BUILD_NUMBER}").push()
+                    docker.build("yonightfury/campus-placement:${BUILD_NUMBER}").push()
                 }
             }
         }
