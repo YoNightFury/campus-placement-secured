@@ -24,5 +24,22 @@ pipeline {
                 }
             }
         }
+        stage('Deploy') {
+                   when {
+                     expression {
+                       (currentBuild.result == null || currentBuild.result == 'SUCCESS')
+                     }
+                   }
+                   steps {
+                       script{
+                       withCredentials([sshUserPrivateKey(credentialsId: "web_id", keyFileVariable: 'KEY'), string(credentialsId:"SSH_HOST", variable:"SSH_HOST"),string(credentialsId:"SSH_USER", variable:"SSH_USER"),]) {
+                       def remote = [:]
+                       remote.host = SSH_HOST
+                       remote.user = SSH_USER
+                       remote.identityFile = KEY
+                       sshCommand remote: remote, command: "docker run hello-world"
+                       }
+                       }
+                   }
     }
 }
