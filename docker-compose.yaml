@@ -1,0 +1,6 @@
+services:
+  webapp:
+    image: yonightfury/campus-placement:latest
+    ports:
+      - "8080:8080"
+    network_mode: host

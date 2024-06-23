@@ -39,7 +39,10 @@ pipeline {
                         remote.user = SSH_USER
                         remote.identityFile = KEY
                         remote.allowAnyHosts = true
-                        sshCommand remote: remote, command: "docker run hello-world"
+                        sshPut remote: remote, from: "./docker-compose.yaml", into:"./docker-compose.yaml"
+                        sshCommand remote: remote, command: "docker compose down"
+                        sshCommand remote: remote, command: "docker compose up"
+
                     }
                 }
             }
