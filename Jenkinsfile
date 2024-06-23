@@ -38,6 +38,7 @@ pipeline {
                         remote.name = "${SSH_USER}@${SSH_HOST}"
                         remote.user = SSH_USER
                         remote.identityFile = KEY
+                        remote.allowAnyHosts = true
                         sshCommand remote: remote, command: "docker run hello-world"
                     }
                 }
