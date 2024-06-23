@@ -3,18 +3,19 @@ FROM node:16-buster-slim as react-build
 WORKDIR /reactapp
 COPY placement-portal-front/package.json ./
 COPY placement-portal-front/package-lock.json ./
+RUN npm i
 COPY placement-portal-front/src ./src
 COPY placement-portal-front/public ./public/
-RUN npm i
 RUN npm run build
 
 FROM eclipse-temurin:11-jdk-focal as spring-build
 WORKDIR /springapp
 COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
+RUN sh ./mvnw dependency:go-offline
 COPY src ./src
 COPY --from=react-build /reactapp/build/ ./src/main/resources/static/
-RUN  sh ./mvnw -e package -DskipTests=true
+RUN  sh ./mvnw --offline -e package -DskipTests=true
 
 # # Create a custom Java runtime
 # RUN $JAVA_HOME/bin/jlink \
