@@ -16,7 +16,11 @@ pipeline {
             }
             steps {
                 script{
-                    docker.build("yonightfury/campus-placement:${BUILD_NUMBER}").push()
+                    def image = docker.build("yonightfury/campus-placement:${BUILD_NUMBER}")
+                    if($BRANCH=="main"){
+                        image.tag("latest")
+                    }
+                    image.push()
                 }
             }
         }
